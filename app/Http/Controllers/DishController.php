@@ -75,7 +75,7 @@ class DishController extends Controller
     {
         $restaurants = Restaurant::all()->sortBy('name');
 
-        return view('back.hotels.edit', [
+        return view('back.dishes.edit', [
             'restaurants' => $restaurants,
             'dish' => $dish
         ]);
@@ -88,7 +88,7 @@ class DishController extends Controller
     {
         // 'Istrinti nuotrauka' mygtuko paspaudimas
         if ($request->delete_photo) {
-            $hotel->deletePhoto();
+            $dish->deletePhoto();
             return redirect()->back();
         }
 
@@ -107,8 +107,8 @@ class DishController extends Controller
             // $image->save(public_path().'/hotels/'.$file);      
             
             // kadangi buvo uzkelta nauja nuotrauka, senaja reikia istrinti
-            if ($hotel->photo) {
-                $hotel->deletePhoto();
+            if ($dish->photo) {
+                $dish->deletePhoto();
             }
             
             $photo->move(public_path().'/dishes', $file); // serveryje is TEMP dir perkeliama i normalia dir. Irasom i serveri su publick_path

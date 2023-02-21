@@ -14,12 +14,12 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Restaurant $srestaurant)
+    public function index(Restaurant $restaurant)
     {
-        $Restaurants = $restaurant->get(); //duomenu gavimas
+        $restaurants = $restaurant->get(); //duomenu gavimas
         
         return view('back.restaurants.index', [
-            'srestaurants' => $restaurants
+            'restaurants' => $restaurants
         ]);
     }
 

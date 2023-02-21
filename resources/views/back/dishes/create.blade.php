@@ -1,20 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Pridėti naują viešbutį')
+@section('title', 'Pridėti naują patiekalą')
 
 @section('content')
 
 <div class="container col-md-7 mt-5">
     <div class="card">
         <div class='card-header'>
-            <h5 class="card-title text-center">Naujo viešbučio kortelė</h5>
+            <h5 class="card-title text-center">Naujo patiekalo kortelė</h5>
         </div>
-        <form class="card-body" action='{{route('hotels-store')}}' method='post' enctype="multipart/form-data">
-
-            <label class="form-label">Šalis</label>
-            <select class="form-select form-select-lg mb-4" name='country'>
+        <form class="card-body" action='{{route('dishes-store')}}' method='post' enctype="multipart/form-data">
+            <label class="form-label">Restoranas</label>
+            <select class="form-select form-select-lg mb-4" name='restaurant'>
                 <option selected></option>
-                @foreach($countries as $value)
+                @foreach($restaurants as $value)
                 <option value="{{$value->name}}">{{$value->name}}</option>
                 @endforeach
             </select>
@@ -22,12 +21,8 @@
             <input required class="form-control form-control-lg mb-4" type="text" name="name">
             <div class='row'>
                 <div class='col'>
-                    <label class="form-label">Kelionės kaina</label>
+                    <label class="form-label">Kaina</label>
                     <input required class="form-control form-control-lg mb-4" type="number" name="price">
-                </div>
-                <div class='col'>
-                    <label class="form-label">Kelionės trukmė</label>
-                    <input required class="form-control form-control-lg mb-4" type="number" name="trip_length">
                 </div>
             </div>
             <label class="form-label">Nuotrauka</label>
