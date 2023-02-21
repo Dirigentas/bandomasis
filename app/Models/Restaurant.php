@@ -14,6 +14,6 @@ class Restaurant extends Model
 
     public function restaurantDishes()
     {
-        return $this->hasMany(Dish::class); // jei ne per ID jungiau lenteles, tai reikia irasyti per ka jungiau, automatiskai nepagauna
+        return $this->hasMany(Dish::class, 'restaurant', 'name'); // jei ne per ID jungiau lenteles, tai reikia irasyti per ka jungiau, automatiskai nepagauna
     }
 }

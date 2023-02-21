@@ -23,6 +23,6 @@ class Dish extends Model
 
     public function dishRestaurant()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class, 'restaurant', 'name');
     }
 }

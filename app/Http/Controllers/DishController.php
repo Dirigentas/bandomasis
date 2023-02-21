@@ -63,8 +63,6 @@ class DishController extends Controller
         $dish->restaurant = $request->restaurant;
         $dish->name = $request->name;
         $dish->price = $request->price;
-        $dish->price = $request->price;
-        $dish->price = $request->price;
         $dish->save();
 
         return redirect()->back()->with('ok', 'Patiekalas pridėtas sėkmingai');
@@ -119,8 +117,6 @@ class DishController extends Controller
 
         $dish->restaurant = $request->restaurant;
         $dish->name = $request->name;
-        $dish->price = $request->price;
-        $dish->price = $request->price;
         $dish->price = $request->price;
         $dish->save();
 
