@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController as R;
 use App\Http\Controllers\DishController as D;
+use App\Http\Controllers\FrontController as F;
 
 
 Route::prefix('admin/restaurants')->name('restaurants-')->group(function () {
@@ -22,6 +23,10 @@ Route::prefix('admin/dishes')->name('dishes-')->group(function () {
     Route::put('/update/{dish}', [D::class, 'update'])->name('update')->middleware('roles:A');    
     Route::delete('/destroy/{dish}', [D::class, 'destroy'])->name('destroy')->middleware('roles:A');    
 });
+
+Route::get('/', [F::class, 'index'])->name('index');
+Route::post('/store', [F::class, 'store'])->name('store');  
+
 
 
 Auth::routes();

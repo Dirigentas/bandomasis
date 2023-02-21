@@ -25,4 +25,9 @@ class Dish extends Model
     {
         return $this->belongsTo(Restaurant::class, 'restaurant', 'name');
     }
+
+    const SORT = [
+        'asc_price' => 'Kaina nuo žemiausios',
+        'desc_price' => 'Kaina nuo didžiausios',
+    ];
 }
