@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('name', 30);
             $table->decimal('price')->unsigned();
             $table->string('photo', 150)->nullable();
-            // $table->foreign('restaurant')->references('name')->on('restaurants');
+            $table->foreign('restaurant')->references('name')->on('restaurants');
         });
     }
 

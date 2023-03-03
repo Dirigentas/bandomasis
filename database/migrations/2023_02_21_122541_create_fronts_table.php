@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('aaa', 30);
             $table->unsignedTinyInteger('rating');
-            $table->foreign('aaa')->references('name')->on('dishes');
+            // cia yra many to many rysys, todel reikia to ismokti, pradzioj bandyti 3 lentele tureti kur abi lenteles jungiu i vidurine
+            // $table->foreign('aaa')->references('name')->on('dishes');
         });
     }
 

@@ -29,8 +29,13 @@ class FrontController extends Controller
             else {
                 $dishes = Dish::where('name', 'like', '%'.$s[0].'%'.$s[1].'%')->orWhere('name', 'like', '%'.$s[1].'%'.$s[0].'%');
             }
-        } else {
-            $dishes = Dish::where('id', '>', 0);
+        } else {      
+            if ($request->restaurant_id && $request->restaurant_id != 'all') {
+                $dishes = Dish::where('id', $request->restaurant_id);
+            }
+            else {
+                $dishes = Dish::where('id', '>', 0);
+            }
         }
 
         $dishes = match($request->sort ?? '') {
@@ -43,13 +48,17 @@ class FrontController extends Controller
          $rating = Front::all();
          $user = Auth::user();
 
+         $restaurants = Restaurant::all()->sortBy('name');
+
         return view('front.home', [
             'dishes' => $dishes,
             'sortSelect' => Dish::SORT,
             'sortShow' => isset(Dish::SORT[$request->sort]) ? $request->sort : '',
             's' => $request->s ?? '',
             'user' => $user,
-            'rating' => $rating
+            'rating' => $rating,
+            'restaurants' => $restaurants,
+            'restaurantShow' => $request->restaurant_id ? $request->restaurant_id : '',
         ]);
     }
 
@@ -98,3 +107,5 @@ class FrontController extends Controller
         //
     }
 }
+
+?>
