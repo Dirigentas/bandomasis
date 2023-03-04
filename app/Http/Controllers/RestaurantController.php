@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\Dish;
 use Illuminate\Http\Request;
-// use App\Http\Controllers\Controller;
-// use Illuminate\Http\RedirectResponse;
-// use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
 {
@@ -36,6 +34,26 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+            'name' => 'required|alpha|min:4|max:100',
+            'city' => 'required|alpha|min:3|max:50',
+            'start' => 'required|date_format:"H:i',
+            'end' => 'required|date_format:"H:i',
+            ],
+        [
+            'name' => 'Netinkamas vardo formatas',
+            'surncityame' => 'Netinkamas miesto formatas',
+            'start' => 'netinkamas laiko formatas',
+            'end' => 'netinkamas laiko formatas, turi būti vėlesnis nei pradžios laikas',
+        ]);
+
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
         $restaurant = new Restaurant;
         $restaurant->name = $request->name;
         $restaurant->city = $request->city;
@@ -85,3 +103,4 @@ class RestaurantController extends Controller
         return redirect()->back()->with('not', 'Restoranas turi susietų patiekalų');
     }
 }
+?>

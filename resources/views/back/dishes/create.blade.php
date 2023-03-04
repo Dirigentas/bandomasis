@@ -21,7 +21,7 @@
             <div class='row'>
                 <div class='col'>
                     <label class="form-label">Kaina</label>
-                    <input required class="form-control form-control-lg mb-4" type="number" name="price">
+                    <input required class="form-control form-control-lg mb-4" type="number" name="price" value="{{old('price')}}">
                 </div>
             </div>
             <label class="form-label">Nuotrauka</label>
