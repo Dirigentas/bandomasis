@@ -14,14 +14,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = $dishes
-        ->get()
-        ->map(function($dish) {
-            $dish->ratings = $dish->rating;
-            // dump(json_decode($dish->rating, 1));
-            return $dish;
-        });
-
+        $dishes = Dish::all(); //duomenu gavimas
         
         return view('back.dishes.index', [
             'dishes' => $dishes
@@ -79,11 +72,7 @@ class DishController extends Controller
 
         $rating[Auth::user()->id]= (int)$request->rating;
 
-        // dump(json_decode($dish->rating, 1));
-        // die;
-
-        $dish->update(['rating' => json_encode($rating)]); 
-        
+        $dish->update(['rating' => json_encode($rating)]);        
 
         return redirect()->back()->with('ok', 'Patiekalas įvertintas sėkmingai');
     }

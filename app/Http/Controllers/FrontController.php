@@ -15,7 +15,7 @@ class FrontController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Dish $dishes, Request $request)
+    public function index(Request $request)
     {
         if ($request->s)
         {
@@ -44,7 +44,26 @@ class FrontController extends Controller
             default => $dishes
         };
         
-         $dishes = $dishes->get(); //duomenu gavimas
+         $dishes = $dishes
+         ->get()
+         ->map(function($dish){
+            $sum = 0;
+            $count = count((array)json_decode($dish->rating, 1));
+            foreach ((array)json_decode($dish->rating, 1) as $value) {
+                $sum += $value;
+            };
+            // dump($count);
+            // dump($sum);
+            // dump($sum / $count);
+            // die;
+            if ($count) {
+                $dish->rating = $sum / $count . ' / 5';
+            } else {
+                $dish->rating = 'nėra';
+            }
+            return $dish;
+         });
+
          $rating = Front::all();
          $user = Auth::user();
 

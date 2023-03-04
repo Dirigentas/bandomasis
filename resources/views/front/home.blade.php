@@ -51,14 +51,12 @@
             <div class='fw-bold col'> {{$dish->name}}</div>
             <div> {{round($dish->price, 0)}} Eur</div>
             <div>
-                {{var_dump(json_decode($dish->rating, 1))}}
-                {{$dish->rating}} balas
-                {{$dish->ratings.}} balas
+                Įvertinimas: {{$dish->rating}}
             </div>
             @if(isset($user))
             <form class='mt-3' action="{{route('update_rating', $dish)}}" method="post" enctype="multipart/form-data">
                 <label>Tavo įvertinimas: </label>
-                <input type="number" min="1" max='5' name="rating">
+                <input required type="number" min="1" max='5' name="rating">
                 <button type="submit" class="col-12 mt-3 btn btn-outline-primary">Įvertinti</button>
                 @csrf
                 @method('put')

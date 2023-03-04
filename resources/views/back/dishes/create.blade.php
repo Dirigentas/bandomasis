@@ -12,7 +12,6 @@
         <form class="card-body" action='{{route('dishes-store')}}' method='post' enctype="multipart/form-data">
             <label class="form-label">Restoranas</label>
             <select class="form-select form-select-lg mb-4" name='restaurant'>
-                <option selected></option>
                 @foreach($restaurants as $value)
                 <option value="{{$value->name}}">{{$value->name}}</option>
                 @endforeach
