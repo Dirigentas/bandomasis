@@ -30,4 +30,8 @@ class Dish extends Model
         'asc_price' => 'Kaina nuo žemiausios',
         'desc_price' => 'Kaina nuo didžiausios',
     ];
+
+    protected $fillable = [
+        'rating',
+    ];
 }

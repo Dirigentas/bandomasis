@@ -25,5 +25,35 @@ class DatabaseSeeder extends Seeder
             'email' => 'a@a',
             'password' => Hash::make('123'),
         ]);
+        DB::table('restaurants')->insert([
+            'name' => 'Hesburger',
+            'city' => 'Vilnius',
+            'address' => 'Minties g.',
+            'start' => '11:00',
+            'end' => '23:00',
+        ]);
+        DB::table('restaurants')->insert([
+            'name' => 'London grill',
+            'city' => 'Kaunas',
+            'address' => 'Gostauto g.',
+            'start' => '10:00',
+            'end' => '22:00',            
+        ]);
+        DB::table('dishes')->insert([
+            'restaurant' => 'Hesburger',
+            'name' => 'Tortilija',
+            'price' => '5',
+        ]);
+        DB::table('dishes')->insert([
+            'restaurant' => 'Hesburger',
+            'name' => 'pica',
+            'price' => '10',
+        ]);
+        DB::table('dishes')->insert([
+            'restaurant' => 'London grill',
+            'name' => 'Hamburgeris',
+            'price' => '15',
+        ]);
     }
 }
+?>

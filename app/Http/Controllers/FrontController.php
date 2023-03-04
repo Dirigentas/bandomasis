@@ -61,20 +61,7 @@ class FrontController extends Controller
             'restaurantShow' => $request->restaurant_id ? $request->restaurant_id : '',
         ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $restaurant = new Front;
-        $restaurant->rating = $request->rating;
-        $restaurant->restaurant = $request->restaurant;
-        $restaurant->save();
-
-        return redirect()->back()->with('ok', 'Patiekalas įvertintas sėkmingai');
-    }
-
+    
     /**
      * Display the specified resource.
      */

@@ -39,26 +39,29 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        @foreach($dishes as $value)
+        @foreach($dishes as $dish)
         <div class="col-6 mt-5">
-            @if($value->photo)
-            <img class='img-fluid img-thumbnail' src='{{asset($value->photo)}}'>
+            @if($dish->photo)
+            <img class='img-fluid img-thumbnail' src='{{asset($dish->photo)}}'>
             @else
             <img class='img-fluid img-thumbnail' src='{{asset('http://localhost/bandomasis/public/no.jpg')}}'>
 
             @endif
-            <div> {{$value->restaurant}}</div>
-            <div class='fw-bold col'> {{$value->name}}</div>
-            <div> {{round($value->price, 0)}} Eur</div>
-            <div> {{$rating}} balas
+            <div> {{$dish->restaurant}}</div>
+            <div class='fw-bold col'> {{$dish->name}}</div>
+            <div> {{round($dish->price, 0)}} Eur</div>
+            <div>
+                {{var_dump(json_decode($dish->rating, 1))}}
+                {{$dish->rating}} balas
+                {{$dish->ratings.}} balas
             </div>
             @if(isset($user))
-            <form class='mt-3' action="{{route('store')}}" method="post">
+            <form class='mt-3' action="{{route('update_rating', $dish)}}" method="post" enctype="multipart/form-data">
                 <label>Tavo įvertinimas: </label>
                 <input type="number" min="1" max='5' name="rating">
-                <input type="hidden" name="dish" value="{{$value->name}}">
                 <button type="submit" class="col-12 mt-3 btn btn-outline-primary">Įvertinti</button>
                 @csrf
+                @method('put')
             </form>
             @else
             <a href='{{route('home')}}' class="col-12 mt-3 btn btn-outline-primary">Rezervuoti (reikalingas prisijungimas)</a>

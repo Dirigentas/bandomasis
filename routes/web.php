@@ -25,7 +25,7 @@ Route::prefix('admin/dishes')->name('dishes-')->group(function () {
 });
 
 Route::get('/', [F::class, 'index'])->name('index');
-Route::post('/store', [F::class, 'store'])->name('store');  
+Route::put('/update-rating/{dish}', [D::class, 'update_rating'])->name('update_rating');  
 
 
 

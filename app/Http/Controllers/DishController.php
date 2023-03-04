@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
-// use App\Http\Controllers\Controller;
-// use Illuminate\Http\RedirectResponse;
-// use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Auth;
 class DishController extends Controller
+
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Dish $dishes)
+    public function index()
     {
-        $dishes = $dishes->get(); //duomenu gavimas
+        $dishes = $dishes
+        ->get()
+        ->map(function($dish) {
+            $dish->ratings = $dish->rating;
+            // dump(json_decode($dish->rating, 1));
+            return $dish;
+        });
+
         
         return view('back.dishes.index', [
             'dishes' => $dishes
@@ -66,6 +71,21 @@ class DishController extends Controller
         $dish->save();
 
         return redirect()->back()->with('ok', 'Patiekalas pridėtas sėkmingai');
+    }
+
+    public function update_rating(Request $request, Dish $dish)
+    {    
+        $rating = json_decode($dish->rating, 1);
+
+        $rating[Auth::user()->id]= (int)$request->rating;
+
+        // dump(json_decode($dish->rating, 1));
+        // die;
+
+        $dish->update(['rating' => json_encode($rating)]); 
+        
+
+        return redirect()->back()->with('ok', 'Patiekalas įvertintas sėkmingai');
     }
 
     /**
@@ -134,3 +154,5 @@ class DishController extends Controller
         return redirect()->back()->with('ok', 'Patiekalas ištrintas sėkmingai');
     }
 }
+
+?>
